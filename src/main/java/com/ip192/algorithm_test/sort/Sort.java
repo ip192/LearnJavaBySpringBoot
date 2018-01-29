@@ -1,4 +1,4 @@
-package com.ip192.sort;
+package com.ip192.algorithm_test.sort;
 
 public class Sort {
     /**

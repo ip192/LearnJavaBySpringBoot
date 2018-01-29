@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 
 @SpringBootApplication
-@ServletComponentScan(basePackages = "com.ip192")
+@ServletComponentScan(basePackages = "com.ip192.spring")
 public class Entrance {
     public static void main(String[] args) {
         SpringApplication.run(Entrance.class, args);
