@@ -1,4 +1,4 @@
-package com.ip192.javaBase.enum_test;
+package com.ip192.javaBaseHelper.enum_test;
 
 public class EnumTest {
 
