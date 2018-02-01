@@ -3,11 +3,14 @@ package com.ip192.javaBaseHelper.dateNcalendar;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import org.junit.Test;
 
 public class TimeDemo {
+    private final String[] weeks = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
     /*
      * SimpleDateFormat 对象实例应单例
      */
@@ -77,13 +80,59 @@ public class TimeDemo {
         System.out.print("现在时间是: ");
         System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
         System.out.print(year + "年" + month + "月" + date + "日");
-        String[] weeks = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
         System.out.print(" " + weeks[week]);
         return null;
     }
     @Test
-    public void testSetTime() {
+    public void testGetTime() {
         getTime();
+    }
+
+
+    /**
+     * 打印当前月份的日历
+     */
+    public void monthPrint() {
+        int[][] month = new int[5][7];
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DATE, 0);
+        int week01 = calendar.get(Calendar.DAY_OF_WEEK); // 1号星期几
+        int monthLength = calendar.getActualMaximum(Calendar.DATE); // 当前月天数
+
+        for (int d = 1; d <= monthLength; d++) {
+            month[d / 7][d % 7 + week01 - 1] = d;
+        }
+
+        System.out.println(" 日  一  二  三  四  五  六");
+        for (int i = 0; i < 5; i++) {
+           for (int j = 0; j < 7; j++) {
+               if (month[i][j] < 10) {
+                   System.out.print("  " + month[i][j]);
+               } else {
+                   System.out.print(" " + month[i][j]);
+               }
+           }
+            System.out.println();
+        }
+    }
+    @Test
+    public void testMonthPrint() {
+        monthPrint();
+    }
+
+
+    /**
+     * 指定时间
+     */
+    public void setTime() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DATE, calendar.get(Calendar.DATE) + 30);
+        System.out.println(calendar.get(Calendar.DATE));
+    }
+    @Test
+    public void testSetTime() {
+        setTime();
     }
 }
 
