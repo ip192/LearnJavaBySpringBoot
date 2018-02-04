@@ -57,6 +57,10 @@ public class ListTest {
     }
 
 
+    /**
+     * 若要实现对象的自定义顺序比较
+     * 要让该类实现comparator接口, 重写compare方法
+     */
     public void sortTry() {
         List<String> strList = new ArrayList() {{
             add("c");
@@ -95,6 +99,100 @@ public class ListTest {
     @Test
     public void testLoopTry() {
         loopTry();
+    }
+
+
+    public void swapTry() {
+        List<String> strList = new ArrayList<>();
+        strList.add("ab");
+        strList.add("cd");
+        strList.add("ef");
+        strList.add("gh");
+        Collections.swap(strList, 0, 3);
+        System.out.println(strList);
+    }
+    @Test
+    public void testSwapTry() {
+        swapTry();
+    }
+
+
+    /**
+     * 获得其中的前n个
+     */
+    public void getSpecifiedLength() {
+        List<Integer> subList = intList.subList(0, 2);
+        System.out.println(subList);
+        System.out.println(intList);
+
+    }
+    @Test
+    public void testGetSpecifiedLength() {
+        getSpecifiedLength();
+    }
+
+
+    public void trimTry() {
+        List<Integer> iList = new ArrayList<>(5);
+        iList.add(10);
+        iList.add(11);
+        iList.add(12);
+        System.out.println(iList);
+        System.out.println(iList.size());
+        // ArrayList 实例的 toArray() 方法是调用的 Arrays.copyOf
+        // no reference to the origin
+        iList.set(1, 111);
+        System.out.println(iList);
+    }
+    @Test
+    public void testTrimTry() {
+        trimTry();
+    }
+
+
+    public void addAllTry() {
+        List<Integer> iList = new ArrayList<>(Arrays.asList(2, 3, 4, 5));
+        List<Integer> jList = new ArrayList<>(Arrays.asList(12, 13, 14, 15));
+        iList.addAll(jList);
+        System.out.println(iList.subList(3,4));
+        iList.set(4, 21);
+        System.out.println(iList);
+        System.out.println(jList);
+        // addAll 并不是拷贝了引用
+        // subList 返回的是引用
+    }
+    @Test
+    public void testAddAllTry() {
+        addAllTry();
+    }
+
+
+    public void listIteratorTry() {
+        ListIterator<Integer> listIterator = intList.listIterator();
+//        System.out.println(listIterator.next());
+//        System.out.println(listIterator.nextIndex());
+
+//        System.out.println(listIterator.previous());
+//        System.out.println(listIterator.previousIndex());
+
+        // ListIterator 的 add() 方法是在当前位置插入
+//        listIterator.add(0);
+//        System.out.println(intList);
+//        listIterator.next();
+//        listIterator.next();
+//        listIterator.add(0);
+//        System.out.println(intList);
+
+        // ListIterator 的 set() 方法是在当前位置替换
+        System.out.println(intList);
+        listIterator.next();
+        listIterator.next();
+        listIterator.set(0);
+        System.out.println(intList);
+    }
+    @Test
+    public void testListIteratorTry() {
+        listIteratorTry();
     }
 }
 
