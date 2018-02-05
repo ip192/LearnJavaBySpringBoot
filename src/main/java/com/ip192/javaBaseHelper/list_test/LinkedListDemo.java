@@ -72,4 +72,19 @@ public class LinkedListDemo {
     public void testGetTry() {
         getTry();
     }
+
+
+    public void cloneTry() {
+        LinkedList<String> strList = new LinkedList<>(Arrays.asList("abc", "def", "ghi"));
+        LinkedList<String> cloneList = (LinkedList)strList.clone();
+        System.out.println(strList);
+        cloneList.set(0, "abcc");
+        System.out.println(strList);
+        strList.set(0, "cba");
+        System.out.println(cloneList);
+    }
+    @Test
+    public void testCloneTry() {
+        cloneTry();
+    }
 }
