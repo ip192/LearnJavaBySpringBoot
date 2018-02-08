@@ -5,7 +5,6 @@ public class Sort {
     /**
      * 插入排序
      * 小到大
-     * @return int[]
      */
     public int[] insertSort() {
         for (int i = 1; i < init.length; i++){ // 将第i个元素插入
@@ -22,7 +21,6 @@ public class Sort {
 
     /**
      * 希尔排序
-     * @return int[]
      */
     public int[] shellSort() {
         for (int gap = init.length / 2; gap > 0; gap /= 2) {
@@ -38,7 +36,33 @@ public class Sort {
     /**
      * 快排
      */
-    public int[] speedSort() {
+    public int[] speedSort(int[] origin) {
+        int[] left; // little than
+        int[] right; // great than
+
+        for (int from = 1; from < origin.length; from++) {
+//            if (origin[0] > origin[from]) left[left.length - 1] = origin[from];
+        }
+
+
+        return init;
+    }
+
+
+    public int[] chooseSort() {
+        for (int i = 0; i < init.length; i++) {
+            int min = i;
+            for (int j = i + 1; j < init.length; j++) {
+                if (init[j] < init[i]) {
+                    min = j;
+                }
+            }
+            if (i != min) {
+                init[i] = init[i] + init[min];
+                init[min] = init[i] - init[min];
+                init[i] = init[i] - init[min];
+            }
+        }
 
         return init;
     }

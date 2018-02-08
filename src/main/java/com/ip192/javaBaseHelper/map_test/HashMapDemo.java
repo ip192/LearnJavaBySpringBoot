@@ -143,4 +143,15 @@ public class HashMapDemo {
     public void testMapLoopTry() {
         mapLoopTry();
     }
+
+
+
+    public void emptyMapLoopTry() {
+        Map<Integer, String> empty = new HashMap<>();
+        empty.forEach((key, value) -> System.out.println(key));
+    }
+    @Test
+    public void testEmptyMapLoopTry() {
+        emptyMapLoopTry();
+    }
 }
