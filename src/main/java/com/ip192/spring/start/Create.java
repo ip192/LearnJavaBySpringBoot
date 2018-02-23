@@ -37,4 +37,11 @@ public class Create {
 
         return login;
     }
+
+//    @PostMapping("mapping-test")
+    @GetMapping("mapping-test")
+    public String mappingTest(@RequestParam String param) {
+
+        return param;
+    }
 }

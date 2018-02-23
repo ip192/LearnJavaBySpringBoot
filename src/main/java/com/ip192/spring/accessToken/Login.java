@@ -7,16 +7,26 @@ public class Login {
 
     public String _id;
 
-    public String code;
-    public String token;
-    public Date endTime;
-    public String content;
+    private String code;
+    private String token;
+    private Date endTime;
+    private String content;
 
-    public String serviceId;
-    public String serviceType;
-    public int status;
-    public long expiresIn;
-    public Date lastAt;
+    private String serviceId;
+    private String serviceType;
+    private int status;
+    private long expiresIn;
+    private Date lastAt;
+
+
+    private void code(String args) {
+        System.out.println(args);
+    }
+    private void code(String str, Integer index, Date date) {
+        System.out.print(str);
+        System.out.print(index);
+        System.out.print(date);
+    }
 
     public String get_id() {
         return _id;
