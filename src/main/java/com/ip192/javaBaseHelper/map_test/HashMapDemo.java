@@ -6,7 +6,7 @@ import org.omg.CORBA.MARSHAL;
 import java.util.*;
 
 public class HashMapDemo {
-    private HashMap<Integer, String> map = new HashMap<Integer, String>(){
+    private Map<Integer, String> map = new HashMap<Integer, String>(){
         {
             put(1, "one");
             put(2, "two");
@@ -15,34 +15,17 @@ public class HashMapDemo {
         }
     };
 
-
-    public void createTry() {
+    @Test
+    public void testCreateTry() {
         System.out.println(map.put(null, "null"));
         System.out.println(map);
         System.out.println(map.put(null, null));
         System.out.println(map);
-
     }
+
+
     @Test
-    public void testCreateTry() {
-        createTry();
-    }
-
-
-
-    public void clearCloneTry() {
-        HashMap<Integer, String> newMap = (HashMap<Integer, String>) map.clone();
-        map.clear();
-        System.out.println(newMap);
-    }
-    @Test
-    public void testClearCloneTry() {
-        clearCloneTry();
-    }
-
-
-
-    public void getContainsTry() {
+    public void testGetContainsTry() {
         System.out.println(map.get(1));
         System.out.println(map.get(11));
 
@@ -51,25 +34,16 @@ public class HashMapDemo {
         System.out.println(map.containsValue("one"));
         System.out.println(map.containsValue("on"));
     }
+
+
     @Test
-    public void testGetContainsTry() {
-        getContainsTry();
-    }
-
-
-
-    public void valuesTry() {
+    public void testValuesTry() {
 //        ArrayList<String> valList = (ArrayList<String>) map.values();
 //        String[] strings = (String[]) map.values().toArray();
 //        System.out.println(valList);
 //        System.out.println(strings);
         System.out.println(map.values());
     }
-    @Test
-    public void testValuesTry() {
-        valuesTry();
-    }
-
 
 
     public void putRemoveTry() {
@@ -94,7 +68,6 @@ public class HashMapDemo {
     }
 
 
-
     public void ketSetStreamTry() {
         System.out.println(map.keySet());
         System.out.println(map.entrySet());
@@ -110,7 +83,6 @@ public class HashMapDemo {
     public void testKeySetStreamTry() {
         ketSetStreamTry();
     }
-
 
 
     public void mapArrayTry() {
@@ -132,26 +104,4 @@ public class HashMapDemo {
         mapArrayTry();
     }
 
-
-
-    public void mapLoopTry() {
-        for (Map.Entry<Integer, String> entry: map.entrySet()) {
-            System.out.println(entry.getKey() + ": " + entry.getValue());
-        }
-    }
-    @Test
-    public void testMapLoopTry() {
-        mapLoopTry();
-    }
-
-
-
-    public void emptyMapLoopTry() {
-        Map<Integer, String> empty = new HashMap<>();
-        empty.forEach((key, value) -> System.out.println(key));
-    }
-    @Test
-    public void testEmptyMapLoopTry() {
-        emptyMapLoopTry();
-    }
 }

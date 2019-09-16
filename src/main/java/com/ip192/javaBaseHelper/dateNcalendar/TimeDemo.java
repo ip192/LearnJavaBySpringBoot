@@ -3,6 +3,7 @@ package com.ip192.javaBaseHelper.dateNcalendar;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -92,7 +93,7 @@ public class TimeDemo {
     /**
      * 打印当前月份的日历
      */
-    public void monthPrint() {
+    private void monthPrint() {
         int[][] month = new int[5][7];
 
         Calendar calendar = Calendar.getInstance();
@@ -125,7 +126,7 @@ public class TimeDemo {
     /**
      * 指定时间
      */
-    public void setTime() {
+    private void setTime() {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.DATE, calendar.get(Calendar.DATE) + 30);
         System.out.println(calendar.get(Calendar.DATE));
@@ -134,11 +135,16 @@ public class TimeDemo {
     public void testSetTime() {
         setTime();
     }
-}
 
-class TestMain {
 
-//    public static void main(String[] args) {
-//
-//    }
+
+    private void localDateTry() {
+        LocalDate date = LocalDate.parse("2018-02-25");
+        System.out.println(date);
+        System.out.println(new Date(date.toEpochDay()));
+    }
+    @Test
+    public void testLocalDateTry() {
+        localDateTry();
+    }
 }

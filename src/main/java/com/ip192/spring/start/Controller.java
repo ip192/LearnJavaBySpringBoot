@@ -1,13 +1,24 @@
 package com.ip192.spring.start;
 
 import com.ip192.spring.accessToken.Login;
+import com.ip192.spring.service.ScopeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
+/**
+ * 当controller和service都使用prototype方式声明时 原型模式生效
+ * 每次请求访问会对应新的controller和service实例
+ */
+//@Scope("prototype")
 @RestController
 @RequestMapping("try")
-public class Create {
+public class Controller {
+    private Integer count = 0;
+    @Autowired
+    private ScopeService scopeService;
 
     @RequestMapping(value = "/success/{str}")
     public String firstTrySuccess(@PathVariable String str) {
@@ -43,5 +54,12 @@ public class Create {
     public String mappingTest(@RequestParam String param) {
 
         return param;
+    }
+
+    @GetMapping("singleton/scope")
+    public void singletonScope() {
+        this.count++;
+        System.out.println("controller count: " + this.count);
+        scopeService.scopeTry();
     }
 }

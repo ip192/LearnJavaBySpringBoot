@@ -194,6 +194,42 @@ public class ListTest {
     public void testListIteratorTry() {
         listIteratorTry();
     }
+
+
+    private void genericTry() {
+        List<Object> objList = new ArrayList<>();
+
+        List<String> strList = new ArrayList<>();
+        strList.add("one");
+        strList.add("two");
+        strList.add("three");
+
+//        objList = (List<Object>) strList; // 编译不通过
+        strList.forEach(str -> objList.add(str));
+        objList.forEach(obj -> {
+            System.out.println(obj);
+            System.out.println(obj.getClass());
+        });
+    }
+    @Test
+    public void testGenericTry() {
+        genericTry();
+    }
+
+
+
+    private void floatListTry() {
+        List<Float> floatList = new ArrayList<>();
+        floatList.add((float)2.2);
+        floatList.add((float)1.2);
+        floatList.forEach(f -> {
+            System.out.println(f.intValue());
+        });
+    }
+    @Test
+    public void testFloatListTry() {
+        floatListTry();
+    }
 }
 
 class TestObject {

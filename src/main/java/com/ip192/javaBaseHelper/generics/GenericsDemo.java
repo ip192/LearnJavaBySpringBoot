@@ -23,6 +23,10 @@ public class GenericsDemo<T extends Iterator> {
     public void testListTry() {
         listTry();
     }
+
+    static void mid() {
+        System.out.println("mid");
+    }
 }
 
 
