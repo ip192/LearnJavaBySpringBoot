@@ -44,4 +44,12 @@ public class IntegerTest {
 //        int a = 3;
 //        System.out.println(a++ > 3 ? (a == 3 ? 10 : 11) : (a == 4 ? 12 : 13));
     }
+
+    @Test
+    public void typeTest() {
+        Integer a = 10;
+        Integer b = 10;
+        System.out.println(a.equals(b));
+
+    }
 }

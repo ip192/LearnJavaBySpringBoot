@@ -7,24 +7,27 @@ import java.util.List;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * 线程安全三大特性：原子性，有序性，可见性
+ */
 public class MultiJobTest {
-    // 不借助volatile
-    private volatile AtomicInteger i = new AtomicInteger(0);
-    private AtomicInteger j = new AtomicInteger(0);
     private Integer k = 0;
+    private static Integer m = 0;
+    // volatile要求对变量的写入不依赖当前值
+    private volatile Integer j = 0;
+    private AtomicInteger i = new AtomicInteger(0);
 
     @Test
     public void loopTest() {
-        for (int a = 0; a < 5; a++) {
+        for (int a = 0; a < 15; a++) {
             new Thread(() -> {
-//                i.getAndIncrement();
-//                System.out.println(Thread.currentThread().getName() + " - " + i.get());
+//                System.out.println(Thread.currentThread().getName() + " - " + i.getAndIncrement());
 
-                j.getAndIncrement();
-                System.out.println(Thread.currentThread().getName() + " - " + j.get());
+                System.out.println(Thread.currentThread().getName() + " - " + j++);
 
-//                k++;
-//                System.out.println(Thread.currentThread().getName() + " - " + k);
+//                System.out.println(Thread.currentThread().getName() + " - " + k++);
+
+//                System.out.println(Thread.currentThread().getName() + " - " + m++);
             }).start();
         }
     }
@@ -56,6 +59,10 @@ public class MultiJobTest {
     public void multiCallableTest() {
         List<String> resList = new ArrayList<>(64);
 
+        // FutureTask实现了Future接口，可中断
+        List<Future<List<String>>> futureList = new ArrayList<>();
+
+        // 可以强转调用ThreadPoolExecutor方法
         ExecutorService executorService = Executors.newFixedThreadPool(3);
 
         /**
@@ -64,29 +71,27 @@ public class MultiJobTest {
          * 所以total = max(max(t1..t3), min(t1..t3) + t4)
          */
         System.out.println(System.currentTimeMillis());
-        Future task1 = executorService.submit(new CallableClass(200L));
-        Future task2 = executorService.submit(new CallableClass(300L));
-        Future task4 = executorService.submit(new CallableClass(500L));
-        Future task3 = executorService.submit(new CallableClass(400L));
+        Future<List<String>> task1 = executorService.submit(new CallableClass(200L));
+        Future<List<String>> task2 = executorService.submit(new CallableClass(300L));
+        Future<List<String>> task4 = executorService.submit(new CallableClass(500L));
+        Future<List<String>> task3 = executorService.submit(new CallableClass(400L));
+        futureList.add(task1);
+        futureList.add(task2);
+        futureList.add(task3);
+        futureList.add(task4);
         try {
-            while (true) {
-                if (task1.isDone() && task2.isDone() && task3.isDone() && task4.isDone()) {
-                    // 调用get()方法时才会执行call里面的逻辑
-                    resList.addAll((List<String>)task1.get());
-                    resList.addAll((List<String>)task2.get());
-                    resList.addAll((List<String>)task3.get());
-                    resList.addAll((List<String>)task4.get());
-                    executorService.shutdown();
-                    break;
-                }
+//            List<String> taskList1 = task1.get();
+//            List<String> taskList2 = task2.get();
+//            List<String> taskList3 = task3.get();
+//            List<String> taskList4 = task4.get();
+            for (Future<List<String>> task : futureList) {
+                // 调用get()方法时才会执行call里面的逻辑，会阻塞直到获得结果
+                resList.addAll(task.get());
             }
             System.out.println(System.currentTimeMillis());
             System.out.println(resList.size());
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 }

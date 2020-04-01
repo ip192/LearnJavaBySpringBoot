@@ -26,4 +26,21 @@ public class TryCatchTest {
     public void test() {
         System.out.println(method());
     }
+
+    public String tryFinallyReturn() {
+        String str = "out";
+        try {
+            str = "try";
+            return str;
+        } catch (Exception e) {
+
+        } finally {
+            str = "finally";
+            return str;
+        }
+    }
+    @Test
+    public void returnTest() {
+        System.out.println(tryFinallyReturn());
+    }
 }

@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-public class CallableClass implements Callable<List<String>> {
+public class
+CallableClass implements Callable<List<String>> {
     private long sleepSec = 200L;
 
     public CallableClass() {

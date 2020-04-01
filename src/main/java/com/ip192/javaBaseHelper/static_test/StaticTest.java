@@ -13,6 +13,10 @@ public class StaticTest {
         System.out.println("code block");
     }
 
+    StaticTest() {
+        System.out.println("constructor");
+    }
+
     static {
         strA = "strA";
         strB = "strB";
@@ -29,9 +33,12 @@ public class StaticTest {
     }
 
     public static void main(String[] args) {
-        System.out.println(StaticTest.getStrD() == "strAstrB");
-        System.out.println(StaticTest.getConcat() == "strAstrB");
-
-        new StaticTest();
+//        System.out.println(StaticTest.getStrD() == "strAstrB");
+//        System.out.println(StaticTest.getConcat() == "strAstrB");
+//
+//        new StaticTest();
+        StaticTest test;
+        System.out.println("mid");
+        test = new StaticTest();
     }
 }

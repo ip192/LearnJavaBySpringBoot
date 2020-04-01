@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
 
 
 public class LinkedListDemo {
@@ -67,6 +68,11 @@ public class LinkedListDemo {
         // 返回但不移除第一个元素
 //        System.out.println(intList.peek());
 //        System.out.println(intList.peekFirst());
+
+        List<Integer> linkedList = new LinkedList<>(intList); // linkedList.listIterator()
+        for (Integer item : linkedList) {
+            System.out.println(item);
+        }
     }
     @Test
     public void testGetTry() {

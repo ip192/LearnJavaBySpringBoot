@@ -31,10 +31,13 @@ public class ArrayListDemo {
 
 
     /**
-     * ArrayList借助内部维护的 Object数组存储数据
-     * 因实现了RandomAccess接口所以 get访问速度快 但因数组的缘故 在末尾增加或删除之外的操作慢
-     * 数组满了后扩容为 old + old >> 1   1.5 * old
+     * 1.ArrayList借助内部维护的 Object数组存储数据
+     *
+     * 2.实现了RandomAccess接口 表示此集合结构内维护着数组或其它可进行遍历优化的结构(使用for循环get下标) LinkedList此类链表结构遍历就不会具备可优化标志
+     *
+     * 3.数组满了后扩容为 old + old >> 1   1.5 * old
      */
+
     /**
      * 初始容量是10 和一个空数组
      * add一个元素 根据数组长度和size值判断是否需要扩容 第一次add 数组变成除第一个元素外其余都为null

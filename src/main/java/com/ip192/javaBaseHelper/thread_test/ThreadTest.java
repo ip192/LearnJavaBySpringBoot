@@ -7,9 +7,13 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 
 public class ThreadTest {
+    /**
+     * Thread.sleep()也可以用TimeUnit.SECONDS.sleep()的方式
+     */
 
     private int num = 1;
 
@@ -17,7 +21,8 @@ public class ThreadTest {
 
     private  int count = 0;
 
-    private void threadInfo() {
+    @Test
+    public void threadInfo() {
         Thread thread = new Thread() {
             @Override
             public void run() {
@@ -26,10 +31,6 @@ public class ThreadTest {
         };
         thread.start();
         System.out.println(thread.getState());
-    }
-    @Test
-    public void testThreadInfo() {
-        threadInfo();
     }
 
 
@@ -81,4 +82,26 @@ public class ThreadTest {
         }
     }
 
+
+    @Test
+    public void entityTest() throws InterruptedException {
+        Entity entity = new Entity();
+        Thread t1 = new Thread(() -> entity.setNum(10));
+        Thread t2 = new Thread(() -> System.out.println(entity.getNum()));
+        t1.start();
+        t2.start();
+    }
+
+
+    @Test
+    public void stateTest() {
+        /**
+         * Thread.State.NEW: 创建了，但没start
+         * Thread.State.RUNNABLE: 正在运行或等待处理器调用
+         * Thread.State.BLOCKED: 等待进入synchronized同步区域
+         * Thread.State.WAITING: 调用wait()、join()被要求等待
+         * Thread.State.TIMED_WAITING: 调用了指定时长的sleep()、join()、wait()
+         * Thread.State.TERMINATED: 运行结束
+         */
+    }
 }
