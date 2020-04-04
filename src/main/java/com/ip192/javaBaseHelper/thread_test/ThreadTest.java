@@ -104,4 +104,13 @@ public class ThreadTest {
          * Thread.State.TERMINATED: 运行结束
          */
     }
+
+
+    @Test
+    public void daemonTest() {
+        /**
+         * 非守护线程全部执行完毕，守护线程也就退出了
+         * 守护线程随时有可能中断，守护线程创建的都是守护线程
+         */
+    }
 }

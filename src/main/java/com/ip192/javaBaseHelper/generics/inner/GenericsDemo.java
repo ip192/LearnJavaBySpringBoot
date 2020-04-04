@@ -47,6 +47,8 @@ class Parent {
         System.out.println("parent static");
     }
 
+    // abstract方法还不确定子类实现逻辑，加synchronized无意义
+//    abstract synchronized void failed(){}
 }
 class Son extends Parent {
 

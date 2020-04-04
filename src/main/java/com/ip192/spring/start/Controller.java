@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Map;
 
 /**
@@ -19,6 +21,7 @@ public class Controller {
     private Integer count = 0;
     @Autowired
     private ScopeService scopeService;
+
 
     @RequestMapping(value = "/success/{str}")
     public String firstTrySuccess(@PathVariable String str) {
@@ -61,5 +64,13 @@ public class Controller {
         this.count++;
         System.out.println("controller count: " + this.count);
         scopeService.scopeTry();
+    }
+
+    @GetMapping("redirect")
+    public void redirectUrl(HttpServletResponse response) throws IOException {
+        /**
+         * redirect是间接转发，重定向   forward是直接转发，像代理请求
+         */
+        response.sendRedirect("singleton/scope");
     }
 }
