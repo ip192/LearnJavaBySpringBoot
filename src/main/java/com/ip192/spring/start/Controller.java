@@ -12,7 +12,7 @@ import java.util.Map;
  * 当controller和service都使用prototype方式声明时 原型模式生效
  * 每次请求访问会对应新的controller和service实例
  */
-//@Scope("prototype")
+// @Scope("prototype")
 @RestController
 @RequestMapping("try")
 public class Controller {
