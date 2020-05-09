@@ -20,12 +20,14 @@ public class ThreadMethodDemo {
     private class WaitNotify {
 
         synchronized private void print1() {
+            System.out.println("print 1");
             int i = 0;
             while(i < 2) {
                 notify();
                 i++;
                 System.out.println(Thread.currentThread().getName());
                 try {
+                    Thread.sleep(200L);
                     wait();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -34,18 +36,21 @@ public class ThreadMethodDemo {
         }
 
         synchronized private void print2() {
+            System.out.println("print 2");
             int i = 0;
             while(i < 2) {
                 notify();
                 i++;
-                System.out.println(2);
+                System.out.println(Thread.currentThread().getName());
                 try {
+                    Thread.sleep(200L);
                     wait();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
         }
+
     }
     /**
      * wait/notify
@@ -54,17 +59,23 @@ public class ThreadMethodDemo {
      * sleep是线程的方法，不释放锁
      */
     @Test
-    public void waitNotifyTest() {
+    public void waitNotifyTest() throws InterruptedException {
         WaitNotify waitNotify = new WaitNotify();
         // 要对同一个对象wait/notify
-        Thread t1 = new Thread(() -> waitNotify.print1());
-        Thread t2 = new Thread(() -> waitNotify.print2());
+        Thread t1 = new Thread(() -> waitNotify.print1(), "One");
+        Thread t2 = new Thread(() -> waitNotify.print2(), "Two");
         // notify会从等待区里通知一个，所以两个可以交互进行，三个会随机出现死锁
 //        Thread t3 = new Thread(() -> waitNotify.print1());
         t1.start();
         t2.start();
 //        t3.start();
+        /**
+         * main方法中会保证线程都执行完，
+         * Test方法中不会等待
+         */
+        Thread.sleep(1000L);
     }
+
 
 
     /**

@@ -94,4 +94,47 @@ public class MultiJobTest {
             e.printStackTrace();
         }
     }
+
+
+
+    @Test
+    public void multiJobCreateObject() throws ExecutionException, InterruptedException {
+        ExecutorService pool = Executors.newCachedThreadPool();
+        Future<List<String>> task = pool.submit(new CallableClass(500L));
+        System.out.println(System.currentTimeMillis());
+        int i = 0;
+        List<String> list = new ArrayList<>();
+        while (i++ < 10000) {
+            list.add(System.currentTimeMillis() + "");
+        }
+        System.out.println(System.currentTimeMillis());
+        list.addAll(task.get());
+
+        System.out.println(list.size());
+        System.out.println(System.currentTimeMillis());
+
+    }
+
+
+    @Test
+    public void fixedPoolTest() {
+        ExecutorService pool = Executors.newFixedThreadPool(2);
+        pool.execute(new MyThread());
+        pool.execute(new MyThread());
+        pool.execute(new MyThread());
+        pool.execute(new MyThread());
+        pool.execute(new MyThread());
+
+        retry:
+        System.out.println("ioc");
+    }
+
+}
+
+class MyThread implements Runnable {
+
+    @Override
+    public void run() {
+        System.out.println(Thread.currentThread().getName());
+    }
 }

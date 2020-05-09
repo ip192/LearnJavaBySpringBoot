@@ -33,6 +33,16 @@ public class GenericsDemo<T extends Iterator> {
         entity = new Parent();
     }
 
+
+    /**
+     * 子类实例调用未重写方法，即调用父类中的方法，此父类方法中调用的方法若被重写，则调用的是子类重写后的方法
+     * 对象为子类实例，调用的方法以子类中的优先
+     */
+    @Test
+    public void  parentSonMethodTest() {
+        Son son = new Son();
+        son.say();
+    }
 }
 
 
@@ -49,6 +59,18 @@ class Parent {
 
     // abstract方法还不确定子类实现逻辑，加synchronized无意义
 //    abstract synchronized void failed(){}
+
+    protected void sayEnglish() {
+        System.out.println("parent speak English");
+    }
+    protected void sayChinese() {
+        System.out.println("parent speak Chinese");
+    }
+    protected void say() {
+        System.out.println("parent say");
+        sayEnglish();
+        sayChinese();
+    }
 }
 class Son extends Parent {
 
@@ -63,5 +85,12 @@ class Son extends Parent {
     @Override
     public String toString() {
         return "this is son";
+    }
+
+    protected void sayEnglish() {
+        System.out.println("son speak English");
+    }
+    protected void sayChinese() {
+        System.out.println("son speak Chinese");
     }
 }

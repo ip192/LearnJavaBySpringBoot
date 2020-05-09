@@ -1,18 +1,19 @@
-package com.ip192.spring.executors;
+package com.ip192.spring.service.executors;
 
-import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
-import java.lang.reflect.Method;
 import java.util.concurrent.Executor;
 import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ThreadPoolExecutor;
 
 @Configuration
-public class BussinessOneThreadPool {
+public class BusinessOneThreadPool {
 
+    /**
+     * Spring的Async所使用线程池配置
+     */
     @Bean(name = "businessOne")
     public Executor threadPoolTaskExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();

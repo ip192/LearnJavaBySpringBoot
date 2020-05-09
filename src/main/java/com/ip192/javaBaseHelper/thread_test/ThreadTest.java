@@ -7,7 +7,9 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class ThreadTest {
@@ -22,14 +24,23 @@ public class ThreadTest {
     private  int count = 0;
 
     @Test
-    public void threadInfo() {
+    public void threadInfo() throws InterruptedException {
         Thread thread = new Thread() {
             @Override
             public void run() {
-                System.out.println(this.getId());
+                try {
+                    System.out.println(this.getId());
+                    Thread.sleep(1000);
+                    System.out.println("sleep done");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } finally {
+                    this.interrupt();
+                }
             }
         };
         thread.start();
+        thread.join();
         System.out.println(thread.getState());
     }
 

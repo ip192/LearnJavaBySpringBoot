@@ -13,16 +13,16 @@ public class RunnerConfig {
     @Bean
     public CommandLineRunner getCommandLine() {
         return (strings) -> {
-            System.out.println(strings.length);
-            System.out.println("Get Command Line");
+//            System.out.println(strings.length);
+//            System.out.println("Get Command Line");
         };
     }
 
     @Bean
     public ApplicationRunner runWhileStart() {
         return (args) -> {
-            System.out.println(args.getSourceArgs().length);
-            System.out.println("run while application start");
+//            System.out.println(args.getSourceArgs().length);
+//            System.out.println("run while application start");
         };
     }
 }

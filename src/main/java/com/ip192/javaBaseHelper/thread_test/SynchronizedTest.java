@@ -13,6 +13,8 @@ public class SynchronizedTest {
      * 对于同一个当前对象 在不同线程中所有同步方法一起被阻塞
      *
      * 当一个线程访问对象的一个synchronized(this)代码块时，其它线程仍然可以访问该对象中的非synchronized(this)代码块。
+     *
+     * synchronized方法不会被继承
      */
     private class SyncMethodClass {
         synchronized private void printA() {
@@ -45,6 +47,7 @@ public class SynchronizedTest {
         t1.start();
         t2.start();
         t3.start();
+
         try {
             Thread.sleep(1000L);
         } catch (InterruptedException e) {
@@ -54,12 +57,32 @@ public class SynchronizedTest {
 
 
     /**
-     * synchronized方法不会被继承
-     */
-
-    /**
      * synchronized修饰静态方法被称为类锁，与对象锁不同，互不影响
+     * 调用方式存在差异，一个是用类调用 一个是用实例调用
      */
+    private static synchronized void stuck() {
+        while (true) {
+            System.out.println("stuck" + Thread.currentThread().getName());
+        }
+    }
+    private synchronized void normalSynchronized() {
+        System.out.println("normal synchronized method");
+    }
+    private void normal() {
+        System.out.println("normal method");
+    }
+    @Test
+    public void staticSyncTest() {
+        SyncMethodClass syncMethod = new SyncMethodClass();
+        Thread t1 = new Thread(() -> stuck());
+        Thread t2 = new Thread(() -> stuck());
+        t1.start();t2.start();
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     /**
@@ -67,12 +90,13 @@ public class SynchronizedTest {
      */
     private int index = 0;
     synchronized private void indexAdd() {
-        if (index < 100) index++;
+        index++;
     }
     @Test
     public void synchronizedTest() throws InterruptedException {
         Thread t1 = new Thread(() -> {
-            while (index < 100) {
+            int i = 0;
+            while (i++ < 100) {
                 try {
                     Thread.sleep(5);
                 } catch (InterruptedException e) {
@@ -82,7 +106,8 @@ public class SynchronizedTest {
             }
         });
         Thread t2 = new Thread(() -> {
-            while (index < 100) {
+            int i = 0;
+            while (i++ < 100) {
                 try {
                     Thread.sleep(10);
                 } catch (InterruptedException e) {
@@ -93,8 +118,8 @@ public class SynchronizedTest {
         });
         t1.start();
         t2.start();
-        t1.join();
-        t2.join();
+//        t1.join();t2.join();
+        Thread.sleep(1200L);
         System.out.println(index);
     }
 

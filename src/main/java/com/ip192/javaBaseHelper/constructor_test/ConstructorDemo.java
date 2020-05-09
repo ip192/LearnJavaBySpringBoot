@@ -22,6 +22,7 @@ class Cons1 {
     {
         System.out.println("代码块初始化");
     }
+
     Cons1() {
         System.out.println("Cons1 constructor");
     }

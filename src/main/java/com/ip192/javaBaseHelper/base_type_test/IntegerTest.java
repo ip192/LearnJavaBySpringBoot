@@ -4,23 +4,38 @@ import org.junit.Test;
 
 public class IntegerTest {
 
-    public static void main(String[] args) {
+    void change(Integer i) {
+        // 相当于执行了i.intValue();
+        i += 1;
+    }
+    @Test
+    public void changeTest() {
         // 相当于执行了 Integer.valueOf(129)
         Integer a = 129;
         new IntegerTest().change(a);
         System.out.println(a);
 
+        System.out.println((1 << Integer.SIZE - 3) - 1);
     }
 
-    void change(Integer i) {
-        // 相当于执行了i.intValue();
-        i += 1;
-    }
-
+    /**
+     * 连续操作
+     */
     @Test
-    public void test() {
-        Integer a = new Integer("44.44");
-        System.out.println(a);
+    public void multiOperate() {
+//        Integer a = new Integer("44.44");
+//        System.out.println(a);
+
+        int i = 2;
+        System.out.println(i++); // 2
+        int j = i++; // 下一行才开始生效
+        j = i++;
+        System.out.println(j); // 4
+
+        // 与操作符优先级无关，从右向左运算，i的值只取一次期间不变
+        int m = 3;
+        System.out.println(m *= m -= m += m); // -9
+
     }
 
     @Test
@@ -47,9 +62,9 @@ public class IntegerTest {
 
     @Test
     public void typeTest() {
-        Integer a = 10;
-        Integer b = 10;
+        Integer a = 127;
+        Integer b = 127;
         System.out.println(a.equals(b));
-
+        System.out.println(a == b);
     }
 }

@@ -7,17 +7,18 @@ public class StaticTest {
     private static final String strA;
     private static final String strB;
     private static String strC;
-    private static String strD = "strAstrB";
+    private static String strD = "strAstrB"; // 1.静态变量初始化
+    private String blank = "blank"; // 3.成员变量初始化
 
     {
-        System.out.println("code block");
+        System.out.println("code block"); // 4.普通代码块初始化
     }
 
     StaticTest() {
-        System.out.println("constructor");
+        System.out.println("constructor"); // 5.执行构造方法
     }
 
-    static {
+    static { // 2.静态代码块初始化
         strA = "strA";
         strB = "strB";
         System.out.println("static code block");
@@ -32,13 +33,4 @@ public class StaticTest {
         return strD;
     }
 
-    public static void main(String[] args) {
-//        System.out.println(StaticTest.getStrD() == "strAstrB");
-//        System.out.println(StaticTest.getConcat() == "strAstrB");
-//
-//        new StaticTest();
-        StaticTest test;
-        System.out.println("mid");
-        test = new StaticTest();
-    }
 }
