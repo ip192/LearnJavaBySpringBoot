@@ -1,0 +1,6 @@
+task showContent {
+    println 'this is content'
+}
+
+
+
