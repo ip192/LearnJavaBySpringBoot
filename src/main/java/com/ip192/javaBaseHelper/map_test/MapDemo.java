@@ -1,5 +1,6 @@
 package com.ip192.javaBaseHelper.map_test;
 
+import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -18,5 +19,34 @@ public class MapDemo {
         map.put(object1, "1");
         map.put(object2, "2");
         System.out.println(map.keySet());
+    }
+
+
+    @Test
+    public void getNoSet() {
+        InnerObject innerObject = new InnerObject();
+        innerObject.setParam(new HashMap<>());
+        innerObject.getParam().put("key", "value");
+
+        System.out.println(JSONObject.toJSONString(innerObject));
+    }
+
+
+    @Test
+    public void tryAssert() {
+        String str = "str";
+        assert str.equals("");
+    }
+}
+
+class InnerObject {
+    private Map<String, Object> param;
+
+    public Map<String, Object> getParam() {
+        return param;
+    }
+
+    public void setParam(Map<String, Object> param) {
+        this.param = param;
     }
 }

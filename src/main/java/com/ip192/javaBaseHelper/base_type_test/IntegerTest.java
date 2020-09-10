@@ -67,4 +67,10 @@ public class IntegerTest {
         System.out.println(a.equals(b));
         System.out.println(a == b);
     }
+
+    @Test
+    public void intToBinary() {
+        int i = 254;
+        System.out.println(Integer.toBinaryString(i));
+    }
 }
