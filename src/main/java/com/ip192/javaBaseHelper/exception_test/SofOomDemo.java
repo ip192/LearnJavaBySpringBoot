@@ -1,5 +1,6 @@
 package com.ip192.javaBaseHelper.exception_test;
 
+import org.aopalliance.aop.AspectException;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -35,5 +36,25 @@ public class SofOomDemo {
     @Test
     public void sofTest() {
         sof();
+    }
+
+
+    public void throwException() {
+//        throw new NullPointerException();
+        throw new AspectException("aspect");
+    }
+    @Test
+    public void exceptionThrowTest() {
+        try {
+            throwException();
+        } catch (RuntimeException runtimeException) {
+            if (runtimeException instanceof NullPointerException) {
+                System.out.println("catch null pointer exception");
+            } else {
+                throw runtimeException;
+            }
+        } catch (Exception e) {
+            System.out.println("catch exception");
+        }
     }
 }

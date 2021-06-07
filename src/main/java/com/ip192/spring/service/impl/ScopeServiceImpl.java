@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 @Scope("prototype")
-@Service
+@Service("scopeService")
 public class ScopeServiceImpl implements ScopeService {
     private Integer count = 0;
 

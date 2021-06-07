@@ -57,4 +57,10 @@ public class LoopModTest {
         }
         System.out.println(entityList);
     }
+
+    @Test
+    public void loopDependencyTest() {
+        DependencyClassA classA = new DependencyClassA();
+        classA.printA();
+    }
 }

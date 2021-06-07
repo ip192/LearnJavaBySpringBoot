@@ -20,9 +20,10 @@ public class StringDemo {
 //        System.out.println("\t".equals("  "));
 //        System.out.println("\t" == "  ");
 
-        String s = new String("abc");
-        change(s);
-        System.out.println(s);
+        String s = new String("abcd");
+        System.out.println(s.substring(0, 2));
+//        change(s);
+//        System.out.println(s);
     }
     @Test
     public void testStringEqual() {
@@ -72,5 +73,17 @@ public class StringDemo {
         int strCode = str.hashCode();
         int strCode2 = str2.hashCode();
         System.out.println(strCode == strCode2);
+    }
+
+    @Test
+    public void emptyNullTest() {
+        System.out.println(("" + null).equals("null"));
+        System.out.println(org.apache.commons.lang3.StringUtils.isEmpty("" + null));
+    }
+
+    @Test
+    public void matchTest() {
+        String demo = "480";
+        System.out.println(demo.matches("[a-z]+"));
     }
 }

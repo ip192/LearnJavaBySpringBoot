@@ -26,6 +26,7 @@ public class DecimalTest {
         System.out.println(d.floatValue() == f); // true
         System.out.println(Math.abs(d - f));
 
+        System.out.println(new BigDecimal("3.777").setScale(2, BigDecimal.ROUND_DOWN));
 //        System.out.println(f.compareTo(d.floatValue())); // true
 //        System.out.println(d.compareTo(f.doubleValue())); // false
     }

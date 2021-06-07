@@ -73,4 +73,12 @@ public class IntegerTest {
         int i = 254;
         System.out.println(Integer.toBinaryString(i));
     }
+
+    @Test
+    public void doubleTest() {
+        double a = 0;
+        double b = 0d;
+        System.out.println(Double.compare(a, b));
+        System.out.println(Double.valueOf("0.00") == 0);
+    }
 }

@@ -23,10 +23,11 @@ public class Controller {
     private ScopeService scopeService;
 
 
-    @RequestMapping(value = "/success/{str}")
-    public String firstTrySuccess(@PathVariable String str) {
+    @RequestMapping(value = "/success/{str}", method = RequestMethod.POST)
+    public String firstTrySuccess(@PathVariable String str, @RequestBody Map<String, String> extra) {
         String res = "firstTry try success? <br/>" + str;
         System.out.println(res);
+        System.out.println(extra);
         return res;
     }
 
